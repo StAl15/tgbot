@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Communicator implements ICommunicator {
 
+    @Override
     public void sendText(Bot bot, Long chatId, String text) {
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(chatId.toString())
