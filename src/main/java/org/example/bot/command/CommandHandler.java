@@ -4,6 +4,7 @@ import org.example.bot.Bot;
 import org.example.bot.communicator.ICommunicator;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+//some
 public class CommandHandler {
 
     private final Bot bot;
