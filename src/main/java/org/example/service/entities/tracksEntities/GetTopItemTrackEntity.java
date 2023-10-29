@@ -1,4 +1,4 @@
-package org.example.service.entities;
+package org.example.service.entities.tracksEntities;
 public class GetTopItemTrackEntity {
     public class Streamable {
         public String text;

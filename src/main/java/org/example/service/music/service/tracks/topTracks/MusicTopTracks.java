@@ -6,7 +6,7 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.example.service.api.ApiBaseConfig;
-import org.example.service.entities.GetTopTracksEntity;
+import org.example.service.entities.tracksEntities.GetTopTracksEntity;
 
 import java.io.IOException;
 import java.util.Objects;

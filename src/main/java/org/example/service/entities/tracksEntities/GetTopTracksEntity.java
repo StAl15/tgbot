@@ -1,6 +1,4 @@
-package org.example.service.entities;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package org.example.service.entities.tracksEntities;
 
 import java.util.List;
 
