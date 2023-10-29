@@ -16,7 +16,7 @@ public class MusicAuth implements IMusicAuth {
         //TODO########-------проверить запрос---------########
 
         HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(ApiBaseConfig.BASE_URL + "/auth")).newBuilder();
-        urlBuilder.addQueryParameter("apiKey", ApiBaseConfig.apikey);
+        urlBuilder.addQueryParameter("api_key", ApiBaseConfig.apikey);
 
         String url = urlBuilder.build().toString();
 
