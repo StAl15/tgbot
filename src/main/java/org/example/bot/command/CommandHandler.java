@@ -2,6 +2,7 @@ package org.example.bot.command;
 
 import org.example.bot.Bot;
 import org.example.bot.communicator.ICommunicator;
+import org.example.service.music.MusicApi;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 //some
@@ -9,6 +10,8 @@ public class CommandHandler {
 
     private final Bot bot;
     private final ICommunicator communicator;
+
+    private final MusicApi musicApi = new MusicApi();
 
     public CommandHandler(Bot bot, ICommunicator communicator) {
         this.bot = bot;
@@ -22,11 +25,11 @@ public class CommandHandler {
                         bot,
                         message.getFrom().getId(),
                         """
-                        Добро пожаловать
-                        Команды:
-                        /help - памагите
-                        /about - хто я
-                        """.trim()
+                                Добро пожаловать
+                                Команды:
+                                /help - памагите
+                                /about - хто я
+                                """.trim()
                 );
             }
             case HELP -> {
@@ -34,8 +37,8 @@ public class CommandHandler {
                         bot,
                         message.getFrom().getId(),
                         """
-                        А кому щас легко
-                        """.trim()
+                                А кому щас легко
+                                """.trim()
                 );
             }
             case ABOUT -> {
@@ -43,8 +46,34 @@ public class CommandHandler {
                         bot,
                         message.getFrom().getId(),
                         """
-                        я робот
+                                /get_singers - список исполнителей
+                                /get_popular - список популярных треков
+                                """.trim()
+                );
+            }
+            case GET_SINGERS -> {
+                String api = musicApi.getTopTracks();
+                String res = String.format("Список исполнителей: %s", api);
+                communicator.sendText(
+                        bot,
+                        message.getFrom().getId(),
+                        res.trim()
+                );
+            }
+            case GET_POPULAR -> {
+                communicator.sendText(
+                        bot,
+                        message.getFrom().getId(),
+                        """
+                        Загрузка...
                         """.trim()
+                );
+                String api = musicApi.getTopTracks();
+                String res = String.format("Список чартов:\n%s", api);
+                communicator.sendText(
+                        bot,
+                        message.getFrom().getId(),
+                        res.trim()
                 );
             }
             default -> {
@@ -58,6 +87,8 @@ public class CommandHandler {
             case "/start" -> Command.START;
             case "/help" -> Command.HELP;
             case "/about" -> Command.ABOUT;
+            case "/get_singers" -> Command.GET_SINGERS;
+            case "/get_popular" -> Command.GET_POPULAR;
             default -> Command.UNKNOWN;
         };
     }
