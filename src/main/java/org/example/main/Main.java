@@ -1,6 +1,7 @@
 package org.example.main;
 
 import org.example.bot.Bot;
+import org.example.service.music.MusicApi;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
