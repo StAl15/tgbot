@@ -6,9 +6,12 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.example.service.api.ApiBaseConfig;
+import org.example.service.entities.tracksEntities.GetTopItemTrackEntity;
 import org.example.service.entities.tracksEntities.GetTopTracksEntity;
+import org.example.utils.FormatTracks;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -16,7 +19,7 @@ public class MusicTopTracks implements IMusicTopTracks {
     public ApiBaseConfig apiBaseConfig = new ApiBaseConfig();
 
     @Override
-    public String getTopTracks() {
+    public ArrayList<GetTopItemTrackEntity> getTopTracks() {
         HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(ApiBaseConfig.BASE_URL + "/")).newBuilder();
         urlBuilder
                 .addQueryParameter("method", "chart.gettoptracks")
@@ -32,29 +35,15 @@ public class MusicTopTracks implements IMusicTopTracks {
                 .build();
 
         try (Response response = apiBaseConfig.okHttpClient.newCall(request).execute()) {
-            System.out.println(url);
-
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             GetTopTracksEntity getTopTracsEntity = objectMapper.readValue(response.body().string(), GetTopTracksEntity.class);
-
-            String res = getTopTracsEntity
-                    .getTracks()
-                    .track
-                    .stream()
-                    .map(it ->
-                            "\n\n\nNAME: " + it.getName() + "\n"
-                                    + "ARTIST: " + it.getArtist().name + "\n"
-                                    + "URL: " + it.getUrl() + "\n"
-                                    + "DURATION: " + it.getDuration() + "\n"
-                                    + "LISTENERS: " + it.getListeners() + "\n\n\n"
-                    )
-                    .collect(Collectors.joining(", "));
-
+            ArrayList<GetTopItemTrackEntity> res = getTopTracsEntity.getTracks().track;
             return res;
+
         } catch (IOException e) {
             System.out.println(String.format("SOMETHING WENT WRONG: %s", e.toString()));
-            return "SOMETHING WENT WRONG";
+            return new ArrayList<GetTopItemTrackEntity>();
         }
     }
 }

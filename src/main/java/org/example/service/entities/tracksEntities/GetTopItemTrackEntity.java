@@ -44,6 +44,38 @@ public class GetTopItemTrackEntity {
         return url;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public void setPlaycount(Integer playcount) {
+        this.playcount = playcount;
+    }
+
+    public void setListeners(Integer listeners) {
+        this.listeners = listeners;
+    }
+
+    public void setMbid(String mbid) {
+        this.mbid = mbid;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setStreamable(Streamable streamable) {
+        this.streamable = streamable;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
     public Streamable getStreamable() {
         return streamable;
     }

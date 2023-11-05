@@ -1,7 +1,10 @@
 package org.example.service.music;
 
+import org.example.service.entities.tracksEntities.GetTopItemTrackEntity;
 import org.example.service.music.service.auth.MusicAuth;
 import org.example.service.music.service.tracks.topTracks.MusicTopTracks;
+
+import java.util.ArrayList;
 
 public class MusicApi implements IMusicApi {
 
@@ -13,7 +16,7 @@ public class MusicApi implements IMusicApi {
     }
 
     @Override
-    public String getTopTracks() {
+    public ArrayList<GetTopItemTrackEntity> getTopTracks() {
         MusicTopTracks musicTopTracks = new MusicTopTracks();
         return musicTopTracks.getTopTracks();
     }

@@ -1,5 +1,6 @@
 package org.example.service.entities.tracksEntities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetTopTracksEntity {
@@ -11,7 +12,7 @@ public class GetTopTracksEntity {
     }
 
     public class GetTopTracksBody {
-        public List<GetTopItemTrackEntity> track;
+        public ArrayList<GetTopItemTrackEntity> track;
         public Attr attr;
     }
 
